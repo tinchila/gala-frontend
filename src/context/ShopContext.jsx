@@ -6,7 +6,7 @@ export const ShopContext = createContext(null);
 // Función para obtener el carrito por defecto
 const getDefaultCart = () => {
     let cart = {};
-    for (let index = 0; index < 300 + 1; index++) {
+    for (let index = 0; index < 301; index++) {
         cart[index] = 0;
     }
     return cart;
@@ -18,59 +18,56 @@ export const ShopContextProvider = (props) => {
     const [all_product, setAll_Product] = useState([]);
     const [cartItems, setCartItems] = useState(getDefaultCart());
 
-    useEffect(()=>{
-        fetch(url+'/allproducts')
-        .then((response)=>response.json())
-        .then((data)=>setAll_Product(data))
+    useEffect(() => {
+        fetch(url + '/allproducts')
+            .then((response) => response.json())
+            .then((data) => setAll_Product(data));
 
-        if(localStorage.getItem('auth-token')) {
-            fetch(url+'/getcart',{
-                method:'POST',
-                headers:{
-                    Accept:'application/form-data',
-                    'auth-token':`${localStorage.getItem('auth-token')}`,
-                    'Content-Type':'application/json'
+        if (localStorage.getItem('auth-token')) {
+            fetch(url + '/getcart', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/form-data',
+                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json'
                 },
-                body:"",
-            }).then((response)=>response.json())
-            .then((data)=>setCartItems(data));
+                body: JSON.stringify({}),
+            }).then((response) => response.json())
+                .then((data) => setCartItems(data));
         }
-    },[])
-
+    }, []);
 
     // Función para agregar al carrito
     const addToCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        if(localStorage.getItem('auth-token')) {
-            fetch(url+'/addtocart', {
-                method:'POST',
-                headers:{
-                    Accept:'application/form-data',
-                    'auth-token':`${localStorage.getItem('auth-token')}`,
-                    'Content-Type':'application/json',
+        if (localStorage.getItem('auth-token')) {
+            fetch(url + '/addtocart', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/form-data',
+                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json',
                 },
-                body:JSON.stringify({"itemId":itemId}),
-            })
-            .then((response)=>response.json())
-            .then((data)=>console.log(data))
+                body: JSON.stringify({ "itemId": itemId }),
+            }).then((response) => response.json())
+                .then((data) => console.log(data));
         }
     }
 
     // Función para remover del carrito
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-        if(localStorage.getItem('auth-token')) {
-            fetch(url+'/removefromcart', {
-                method:'POST',
-                headers:{
-                    Accept:'application/form-data',
-                    'auth-token':`${localStorage.getItem('auth-token')}`,
-                    'Content-Type':'application/json',
+        if (localStorage.getItem('auth-token')) {
+            fetch(url + '/removefromcart', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/form-data',
+                    'auth-token': `${localStorage.getItem('auth-token')}`,
+                    'Content-Type': 'application/json',
                 },
-                body:JSON.stringify({"itemId":itemId}),
-            })
-            .then((response)=>response.json())
-            .then((data)=>console.log(data))
+                body: JSON.stringify({ "itemId": itemId }),
+            }).then((response) => response.json())
+                .then((data) => console.log(data));
         }
     }
 
@@ -86,20 +83,19 @@ export const ShopContextProvider = (props) => {
         return totalAmount;
     }
 
-    //Mostrar la cantidad total en el carrito
+    // Mostrar la cantidad total en el carrito
     const getTotalCartItems = () => {
         let totalItem = 0;
         for (const item in cartItems) {
-            if (cartItems[item]>0) {
+            if (cartItems[item] > 0) {
                 totalItem += cartItems[item];
             }
         }
         return totalItem;
     }
 
-
     // Valor del contexto
-    const contextValue = {getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart };
+    const contextValue = { getTotalCartItems, getTotalCartAmount, all_product, cartItems, addToCart, removeFromCart };
 
     return (
         <ShopContext.Provider value={contextValue}>
