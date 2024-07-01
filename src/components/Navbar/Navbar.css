@@ -4,18 +4,25 @@
     padding: 15px 0px;
     box-shadow: 0 1px 3px -2px black;
     align-items: center;
+    background: #fde1ff;
+    color: #515151;
 }
 
 .nav-logo{
     display: flex;
     align-items: center;
-    gap: 10px;
+    
+}
+.nav-logo-img{
+    height: 180px;
+    width: 150px;
 }
 
 .nav-logo p{
     color: #171717;
-    font-size: 38px;
-    font-weight: 600;
+    font-size: 25px;
+    margin-top: 25px;
+    font-weight: 200;
 }
 
 .nav-menu{
@@ -23,7 +30,7 @@
     align-items: center;
     list-style: none;
     gap: 50px;
-    color: #626262;
+    color: #515151;
     font-size: 20px;
     font-weight: 500;
 }
@@ -35,6 +42,7 @@
     justify-content: center;
     gap: 3px;
     cursor: pointer;
+    color: #515151;
 }
 
 .nav-menu hr{
@@ -51,7 +59,7 @@
     gap:45px;
 }
 .nav-login-cart button{
-    width: 157px;
+    width: 156px;
     height: 58px;
     outline: none;
     border: 1px solid #7a7a7a;
@@ -59,7 +67,7 @@
     color: #515151;
     font-size: 20px;
     font-weight: 500;
-    background: white;
+    background: transparent;
     cursor: pointer;
 }
 .nav-login-cart button:active{
@@ -88,11 +96,9 @@
     .navbar{
         padding: 12px 50px;
     }
-    .nav-logo img{
-        width: 40px;
-    }
-    .nav-logo p{
-        font-size: 25px;
+    .nav-logo-img{
+        height: 140px;
+        width: 120px;
     }
     .nav-menu{
         gap: 30px;
@@ -168,6 +174,17 @@
     }
     .nav-logo{
         transform: scale(0.8);
+    }
+    .nav-logo-img{
+        height: 120px;
+        width: 100px;
+    }
+    
+    .nav-logo p{
+        color: #171717;
+        font-size: 20px;
+        margin-top: 25px;
+        font-weight: 200;
     }
     .nav-menu{
         height: 70px;
