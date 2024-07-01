@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 
 const Popular = () => {
 
+  const url = "https://gala-backend-nf24.onrender.com";
   const [popularProducts, setPopularProducts] = useState([]);
 
   useEffect(()=>{
-    fetch('http://localhost:4000/popular')
+    fetch(url+'/popular')
     .then((response)=>response.json())
     .then((data)=>setPopularProducts(data));
   },[])

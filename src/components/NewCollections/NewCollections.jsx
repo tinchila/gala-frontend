@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 
 const NewCollections = () => {
 
+  const url = "https://gala-backend-nf24.onrender.com";
   const [new_collections, setNew_Collection] = useState([]);
 
   useEffect(()=>{
-    fetch('http://localhost:4000/newcollections')
+    fetch(url+'/newcollections')
     .then((response)=>response.json())
     .then((data)=>setNew_Collection(data));
   },[])

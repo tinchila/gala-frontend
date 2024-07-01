@@ -3,6 +3,7 @@ import './CSS/LogginSignUp.css'
 
 const LoginSingUp = () => {
 
+  const url = "https://gala-backend-nf24.onrender.com";
   const [state, setState] = useState("Login");
   const [formData, setFormData] = useState({
     username:"",
@@ -17,7 +18,7 @@ const LoginSingUp = () => {
   const login = async () => {
     console.log("Login Function Executed", formData)
     let responseData;
-    await fetch('http://localhost:4000/login',{
+    await fetch(url+'/login',{
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -38,7 +39,7 @@ const LoginSingUp = () => {
   const signup = async () => {
     console.log("Sing Up Function Executed", formData)
     let responseData;
-    await fetch('http://localhost:4000/signup',{
+    await fetch(url+'/signup',{
       method:'POST',
       headers:{
         Accept:'application/form-data',
